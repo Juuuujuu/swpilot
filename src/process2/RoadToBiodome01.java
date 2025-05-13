@@ -25,7 +25,7 @@ public class RoadToBiodome01 {
         for(int i=0;i<input.length;i++){
             inputt=inputt.concat(input[i]);
         }
-        StringTokenizer inputtok =new StringTokenizer(inputt,", []"); //토크나이저로 없앰
+        StringTokenizer inputtok =new StringTokenizer(inputt,", []"); //토크나이저로 나눔
         int[] finput = new int[inputtok.countTokens()]; //숫자만 넣는 배열
         int i=0;
         while(inputtok.hasMoreTokens()){
