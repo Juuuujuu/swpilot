@@ -1,4 +1,3 @@
-
 package process2;
 
 import java.util.Scanner;
