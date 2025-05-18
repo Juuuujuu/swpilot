@@ -1,14 +1,18 @@
 # 시간복잡도 
 
 입력값과 연산 수행 시간의 상관관계를 나타내는 척도
+
 알고리즘의 성능을 설명하는 것이다. 프로세스가 수행해야하는 연산을 수치화한 것
+
 실제 전체 실행시간보다 명령문의 실행시간을 계산하여 나타냄 
 
 
 ### 표기법
 
 best case -> Big-Ω
+
 average case -> Big-θ
+
 worst case -> Big-O
 
 
@@ -122,7 +126,7 @@ public class RoadToBiodome02 {
     시간복잡도 => O(n)
 
 ### 시간복잡도를 줄일 수 있는 방법
-    ① 이중 for문에서 병목현상이 생기며, 이는 hashmap을 사용하여 O(n)으로 고칠 수 있다.
+##### 1. 이중 for문에서 병목현상이 생기며, 이는 hashmap을 사용하여 O(n)으로 고칠 수 있다.
 
     [finding 메서드 내에서의 수정]
     HashMap<Integer, Integer> countMap = new HashMap<>();
@@ -138,7 +142,7 @@ public class RoadToBiodome02 {
             }
         }
 
-    ② StringBuilder를 사용하여 더 간단한 코드로 만든다
+##### 2. StringBuilder를 사용하여 더 간단한 코드로 만든다
     [StringBuilder를 사용한 간략한 코드]
      StringBuilder original = new StringBuilder();
         for (int i = 0; i < args.length; i++) {
