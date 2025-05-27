@@ -1,4 +1,4 @@
-package process3.ex5;
+package process3.ex5.classes;
 
 import java.util.ArrayList;
 import java.util.List;

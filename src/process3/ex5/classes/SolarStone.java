@@ -1,4 +1,4 @@
-package process3.ex5;
+package process3.ex5.classes;
 
 
 public class SolarStone extends AncientArtifact implements EnergyGenerator {

@@ -1,4 +1,4 @@
-package process3.ex5;
+package process3.ex5.classes;
 
 public class WaterMirror extends AncientArtifact implements WeatherController, EnergyGenerator{
 

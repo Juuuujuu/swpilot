@@ -1,4 +1,4 @@
-package process3.ex5;
+package process3.ex5.classes;
 
 public abstract class AncientArtifact {
     private String name; // 고대유물 이름
