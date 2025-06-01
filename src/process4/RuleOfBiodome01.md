@@ -119,6 +119,7 @@ abstract class User {
 해결 방법 : 여러 책임들 별도로 분리합니다.
 
 
+
 2.
 ```
     public void addMember(Member member) {
@@ -134,6 +135,7 @@ abstract class User {
 만약 새로운 사용자 타입이 추가되면 이 코드를 수정해야 하기 때문입니다.
 
 해결 방법 : member,manager 말고 user를 사용하여 user를 상속받아 구현합니다.
+
 
 
 3.
