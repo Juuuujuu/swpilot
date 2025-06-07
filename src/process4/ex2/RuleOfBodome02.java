@@ -15,7 +15,6 @@ class Book {
         this.title = title;
         this.author = author;
         this.isBorrowed = false;
-        System.out.printf("관리자 \'%s\'가 책을 추가합니다:\'%s\',\'%s\'\n",manager.name,title,author);
     }
 }
 
@@ -37,13 +36,26 @@ abstract class User {
         }
     }
 
-    public void borrowreturnBook(Book book) {
+    public void borrowBook(Book book) {
         if(!book.isBorrowed) {
-            System.out.printf("이용자 \'%s\' \'%s\'대출합니다.\n ",name,book.title);
+            if(manager)
+                System.out.printf("관리자 \'%s\' \'%s\'대출합니다.\n ",name,book.title);
+            else
+                System.out.printf("이용자 \'%s\' \'%s\'대출합니다.\n ",name,book.title);
             book.isBorrowed = true;
         }
-        else
+        else{
+            System.out.printf("\'%s\'은 대출중입니다.\n",book.title);
+        }
+    }
+    public void returnBook(Book book) {
+        if(book.isBorrowed) {
+            if(manager)
+                System.out.printf("관리자 \'%s\' \'%s\'반납합니다.\n ",name,book.title);
+            else
+                System.out.printf("이용자 \'%s\' \'%s\'반납합니다.\n ",name,book.title);
             book.isBorrowed = false;
+        }
     }
 
     abstract void addBook(String userId,Book book, Library library);
@@ -64,37 +76,24 @@ class Users extends User {
     }
 }
 
-//class Manager extends User {
-//    public Manager(String userId, String name) {
-//        super(userId, name);
-//    }
-//
-//    public void addBook(Book book, Library library) {
-//        library.addBook(book);
-//    }
-//
-//    public void removeBook(Book book, Library library) {
-//        library.removeBook(book);
-//    }
-//}
-
-
 class Library {
     private List<Book> books = new ArrayList<>();
     private List<User> users = new ArrayList<>();
 
     public Book writeBook(String isbn, String title, String author, User manager) {
+
+        Book book = new Book(isbn, title, author,manager);
         if(!checkBook(isbn,manager)){
-            Book book = new Book(isbn, title, author,manager);
+            System.out.printf("관리자 \'%s\'가 책을 추가합니다:\'%s\',\'%s\'\n",manager.name,title,author);
             books.add(book);
-            return book;
         }
+        return book;
     }
     public boolean checkBook(String isbn,User manager) {
         boolean found = false;
         for (Book book : books) {
             if (book.isbn.equals(isbn)) {
-                System.out.printf("관리자 \'%s\' 새로운 책 %s - %s 추가합니다.", manager.name,book.title, book.author);
+                System.out.printf("관리자 \'%s\' 새로운 책 %s - %s 추가합니다.\n", manager.name,book.title, book.author);
                 found = true;
                 break;
             }
@@ -102,12 +101,20 @@ class Library {
         return found;
     }
 
-    public void removeBook(Book book) {
-        books.remove(book);
-    }
 
     public void adduser(User member) {
         users.add(member);
+    }
+    public void findbook(String namee){
+        System.out.printf("저자 \'%s\'의 책 목록:\n",namee);
+        for(Book book : books){
+            if(book.author.equals(namee)){
+                if(book.isBorrowed)
+                    System.out.printf("- %s, 대출 불가\n",book.title);
+                else
+                    System.out.printf("- %s, 대출 가능\n",book.title);
+            }
+        }
     }
 }
 
@@ -129,20 +136,22 @@ public class RuleOfBodome02 {
         Book book5 = library.writeBook("0005", "야채의 비밀", "송은정",manager1);
         System.out.println();
 
-        member1.borrowreturnBook(book1);
+        member1.borrowBook(book1);
         System.out.println();
 
-        Book book6 = library.writeBook("0001", "자바의 구름", "제임스밤",manager1);
+        Book book6 = library.writeBook("0006", "자료구조의 언덕", "황수",manager1);
+        Book book7 = library.writeBook("0007", "그곳에 가면", "한송희",manager1);
+        System.out.println();
 
-//        Book book2 = library.writeBook("0002", "Book2", "Author2");
-
-//        User member= new user("U001", "Kim","member");
-//        User manager = new user("U002", "Song","manager");
-//
-//
-//        member.borrowreturnBook(book1);
-//        System.out.println("책을 빌립니다: " + book1.title);
-//        member.borrowreturnBook(book1);
-//        System.out.println("책을 반납합니다: " + book1.title);
+        Book book8 = library.writeBook("0006", "자료구조의 언덕", "황수",manager1);
+        Book book9 = library.writeBook("0007", "그곳에 가면", "한송희",manager1);
+        System.out.println();
+        member2.borrowBook(book1);
+        System.out.println();
+        member1.returnBook(book1);
+        System.out.println();
+        manager1.borrowBook(book4);
+        System.out.println();
+        library.findbook("한송희");
     }
 }
